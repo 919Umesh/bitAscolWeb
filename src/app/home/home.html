@@ -1,0 +1,64 @@
+<div class="home-container">
+  <div class="floating-objects">
+    <div class="floating-circle circle-1"></div>
+    <div class="floating-circle circle-2"></div>
+    <div class="floating-circle circle-3"></div>
+    <div class="floating-circle circle-4"></div>
+  </div>
+  
+  <div class="hero-content reverse-layout">
+    
+    <div class="image-content">
+      <img src="assets/svg/study.svg" alt="Study Illustration">
+    </div>
+
+    <div class="text-content right-aligned-text">
+      <h1>Welcome to <span class="highlight">Amrit Science Campus(BIT)</span></h1>
+      <p class="subtitle">Made by BIT students for BIT Students</p>
+      <button class="cta-btn"  (click)="openMoreResource()">Access Resources</button>
+    </div>
+  </div>
+<div class="notices-section">
+  @if (notices.length > 0) {
+    <div class="section-header">
+      <h2>Latest Notices</h2>
+      <div class="header-line"></div>
+    </div>
+    
+    <div class="notices-grid">
+      @for (notice of notices; track notice.$id) {
+      <div class="notice-card" (click)="downloadNoticeDirect(notice.$id)">
+          <div class="notice-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14 2V8H20" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 13H8" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 17H8" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 9H9H8" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="notice-content">
+            <h3 class="notice-title">{{ notice.topic }}</h3>
+            <p class="notice-date">Published: {{ formatDate(notice.$createdAt) }}</p>
+          </div>
+        
+        </div>
+      }
+    
+    </div>
+    
+  @if(notices.length >= 10) {
+  <button class="view-more-btn" (click)="openMore()">
+    View More Notices
+  </button>
+}
+
+  } @else {
+    <div class="no-notices">
+      <p>No notices available at the moment.</p>
+    </div>
+  }
+</div>
+
+
+</div>

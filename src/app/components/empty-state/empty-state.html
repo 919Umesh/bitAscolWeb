@@ -1,0 +1,31 @@
+<div class="empty-state">
+  <div class="empty-content">
+    <!-- Image Section -->
+    <div class="empty-image" *ngIf="showImage">
+      <img 
+        [src]="imageUrl" 
+        [alt]="imageAlt" 
+        class="empty-img"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Icon Section -->
+    <div class="empty-icon" *ngIf="!showImage">{{ icon }}</div>
+
+    <!-- Text Content -->
+    <div class="empty-text-content">
+      <h2 class="empty-title">{{ title }}</h2>
+      <p class="empty-description">{{ description }}</p>
+    </div>
+
+    <!-- Action Button -->
+    <button 
+      *ngIf="actionText" 
+      (click)="onAction.emit()" 
+      class="empty-action-btn"
+      type="button">
+      {{ actionText }}
+    </button>
+  </div>
+</div>

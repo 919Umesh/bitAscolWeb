@@ -1,0 +1,132 @@
+<div class="notices-container">
+  <div class="notices-header">
+    <h1>Notices</h1>
+    <p>Stay updated with the latest announcements and important information</p>
+  </div>
+
+  <!-- Error Display -->
+  @if (error) {
+    <div class="error-message">
+      <span>{{ error }}</span>
+      <button class="close-error" (click)="clearError()">×</button>
+    </div>
+  }
+
+  <!-- Loading State -->
+  @if (isLoading) {
+    <div class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Loading notices...</p>
+    </div>
+  }
+
+  <!-- Notices List -->
+  <div class="notices-list">
+    @for (notice of notices; track notice.$id) {
+      <div class="notice-card" (click)="openNotice(notice)">
+        <div class="notice-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" 
+                  stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 2V8H20" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 13H8" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 17H8" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="notice-content">
+          <h3 class="notice-title">{{ notice.topic }}</h3>
+          <div class="notice-meta">
+            <span class="notice-date">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              {{ formatDate(notice.$createdAt) }}
+            </span>
+            @if (notice.file) {
+              <span class="notice-file">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                  <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+                Has attachment
+              </span>
+            }
+          </div>
+        </div>
+
+        <div class="notice-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+    } @empty {
+      @if (!isLoading) {
+        <div class="no-notices">
+          <div class="no-notices-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-light)">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <h3>No Notices Available</h3>
+          <p>There are no notices to display at the moment. Please check back later.</p>
+        </div>
+      }
+    }
+  </div>
+
+  <!-- Pagination Controls -->
+  @if (totalPages > 1 && !isLoading) {
+    <div class="pagination-container">
+      <div class="pagination-info">
+        <p>
+          Showing <strong>{{ (currentPage - 1) * itemsPerPage + 1 }}</strong> 
+          to <strong>{{ Math.min(currentPage * itemsPerPage, totalNotices) }}</strong> 
+          of <strong>{{ totalNotices }}</strong> notices
+        </p>
+      </div>
+      
+      <div class="pagination-controls">
+        <button 
+          class="pagination-btn prev-btn" 
+          [class.disabled]="!hasPrevPage"
+          (click)="prevPage()"
+          [disabled]="!hasPrevPage">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Previous
+        </button>
+
+        <div class="page-numbers">
+          @for (page of [].constructor(totalPages); track $index) {
+            <button 
+              class="page-number {{ currentPage === $index + 1 ? 'active' : '' }}"
+              (click)="goToPage($index + 1)">
+              {{ $index + 1 }}
+            </button>
+          }
+        </div>
+
+        <button 
+          class="pagination-btn next-btn" 
+          [class.disabled]="!hasNextPage"
+          (click)="nextPage()"
+          [disabled]="!hasNextPage">
+          Next
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  }
+</div>

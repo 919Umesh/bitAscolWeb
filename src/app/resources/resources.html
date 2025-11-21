@@ -1,0 +1,236 @@
+<!-- resources.html -->
+<div class="resources-container">
+  <!-- Error Message -->
+  <div *ngIf="error" class="error-banner">
+    <span>{{ error }}</span>
+    <button (click)="error = ''" class="error-close">×</button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+
+  <div class="content-wrapper">
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb" *ngIf="selectedSemester || selectedSubject">
+      <button (click)="resetSelections()" class="breadcrumb-link">Home</button>
+      <span class="breadcrumb-separator">/</span>
+      <button 
+        *ngIf="selectedSemester" 
+        (click)="backToSemesters()" 
+        class="breadcrumb-link"
+        [class.active]="!selectedSubject">
+        {{ selectedSemester.name }}
+      </button>
+      <span class="breadcrumb-separator" *ngIf="selectedSubject">/</span>
+      <span *ngIf="selectedSubject" class="breadcrumb-current">{{ selectedSubject.name }}</span>
+    </div>
+
+    <!-- Semesters Selection -->
+    <div class="section" *ngIf="!selectedSemester">
+        <h1 class="semester-head">Resources</h1>
+        <P class="semester-body">This is a web application which provides complete set of reference materials such as notes, past question papers, syllabus and more for BIT students.</P>
+      <div class="semester-grid">
+        
+        <div 
+          *ngFor="let semester of semesters" 
+          class="semester-card"
+          (click)="selectSemester(semester)">
+          <div class="semester-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <div class="semester-content">
+            <h3 class="semester-title">{{ semester.name }}</h3>
+            <p class="semester-description">{{ semester.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subjects Selection -->
+    <div class="section" *ngIf="selectedSemester && !selectedSubject">
+      <div class="page-header">
+        <h1 class="page-title">{{ selectedSemester.name }}</h1>
+        <p class="page-description">{{ selectedSemester.description }}</p>
+      </div>
+      
+      <div class="subject-grid">
+        <div 
+          *ngFor="let subject of subjects" 
+          class="subject-card"
+          (click)="selectSubject(subject)">
+          <div class="subject-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <div class="subject-content">
+            <h3 class="subject-title">{{ subject.name }}</h3>
+            <p class="subject-description">{{ subject.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resource Type Selection - Show all three types with their actual data -->
+    <div class="section" *ngIf="selectedSubject && !selectedResourceType">
+      <div class="page-header">
+        <h1 class="page-title">{{ selectedSubject.name }}</h1>
+        <p class="page-description">All available resources for this subject</p>
+      </div>
+
+      <div class="resources-section-wrapper">
+        <!-- Syllabus Section - Show actual syllabus data -->
+        <div class="resource-section">
+          <div class="resource-section-header">
+            <div class="resource-section-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <div class="resource-section-title-wrapper">
+              <h3 class="resource-section-title">Syllabus</h3>
+              <span class="resource-count-badge">{{ getResourceCount('syllabus') }} items</span>
+            </div>
+          </div>
+          <div class="resource-files-preview">
+            <div 
+              *ngFor="let resource of allResources['syllabus']" 
+              class="file-preview-item"
+              (click)="downloadResource(resource.$id)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#ef4444">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span>{{ resource.title }}</span>
+            </div>
+            <div *ngIf="allResources['syllabus'].length === 0" class="no-resources-message">
+              No syllabus available
+            </div>
+          </div>
+        </div>
+
+        <div class="resource-section">
+          <div class="resource-section-header">
+            <div class="resource-section-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <div class="resource-section-title-wrapper">
+              <h3 class="resource-section-title">Study Notes</h3>
+              <span class="resource-count-badge">{{ getResourceCount('note') }} items</span>
+            </div>
+          </div>
+          <div class="resource-files-preview">
+            <div 
+              *ngFor="let resource of allResources['note']" 
+              class="file-preview-item"
+              (click)="downloadResource(resource.$id)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#ef4444">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span>{{ resource.title }}</span>
+            </div>
+            <div *ngIf="allResources['note'].length === 0" class="no-resources-message">
+              No study notes available
+            </div>
+          </div>
+        </div>
+
+        <!-- Questions Section - Show actual question papers data -->
+        <div class="resource-section">
+          <div class="resource-section-header">
+            <div class="resource-section-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <div class="resource-section-title-wrapper">
+              <h3 class="resource-section-title">Question Papers</h3>
+              <span class="resource-count-badge">{{ getResourceCount('question') }} items</span>
+            </div>
+          </div>
+          <div class="resource-files-preview">
+            <div 
+              *ngFor="let resource of allResources['question']" 
+              class="file-preview-item"
+              (click)="downloadResource(resource.$id)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#ef4444">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span>{{ resource.title }} {{ resource.year ? '(' + resource.year + ')' : '' }}</span>
+            </div>
+            <div *ngIf="allResources['question'].length === 0" class="no-resources-message">
+              No question papers available
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resources List (Keep existing for backward compatibility) -->
+    <div class="section" *ngIf="resources.length > 0 && selectedResourceType">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">{{ getResourceTypeDisplayName() }}</h1>
+          <p class="section-count">{{ resources.length }} items found</p>
+        </div>
+        <button (click)="backToResourceTypes()" class="btn-secondary">
+          Back to All Resources
+        </button>
+      </div>
+
+      <div class="resources-grid">
+        <div class="resource-item" *ngFor="let resource of resources">
+          <div class="resource-content">
+            <h3 class="resource-name">{{ resource.title }}</h3>
+            <p *ngIf="resource.description" class="resource-description">
+              {{ resource.description }}
+            </p>
+            <div class="resource-footer">
+              <div class="resource-meta">
+                <span *ngIf="resource.year && selectedResourceType === 'question'" class="meta-badge">
+                  {{ resource.year }}
+                </span>
+                <span class="meta-date">
+                  {{ resource.$createdAt | date:'MMM dd, yyyy' }}
+                </span>
+              </div>
+              <button 
+                (click)="downloadResource(resource.$id)" 
+                class="btn-download">
+                ↓ Download
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedSubject && !loading && resources.length === 0 && selectedResourceType" class="empty-state">
+      <div class="empty-icon">📭</div>
+      <h2 class="empty-title">No resources found</h2>
+      <p class="empty-text">
+        No {{ getResourceTypeDisplayName().toLowerCase() }} available for {{ selectedSubject.name }}
+      </p>
+      <button (click)="backToResourceTypes()" class="btn-primary">
+        Back to All Resources
+      </button>
+    </div>
+  </div>
+</div>

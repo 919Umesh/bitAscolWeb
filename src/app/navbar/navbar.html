@@ -1,0 +1,27 @@
+<nav class="navbar">
+  <div class="nav-brand">
+    <a routerLink="/" class="nav-brand-link">
+      <img src="assets/svg/bit.svg" alt="BIT ASCOL Logo" class="nav-logo">
+      <h3 class="nav-brand-text">BIT ASCOL</h3>
+    </a>
+  </div>
+
+  <!-- Desktop Links (center) -->
+  <ul class="nav-links-center">
+    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/resources" routerLinkActive="active">Resources</a></li>
+    <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
+    <li><a routerLink="/details" routerLinkActive="active">Details</a></li>
+  </ul>
+
+  <!-- Mobile Menu Button -->
+  <div class="menu-btn" (click)="toggleMenu()">☰</div>
+</nav>
+
+<!-- Mobile Dropdown Menu -->
+<ul *ngIf="menuOpen" class="nav-links-mobile">
+  <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
+  <li><a routerLink="/resources" routerLinkActive="active" (click)="closeMenu()">Resources</a></li>
+  <li><a routerLink="/gallery" routerLinkActive="active" (click)="closeMenu()">Gallery</a></li>
+  <li><a routerLink="/details" routerLinkActive="active" (click)="closeMenu()">Details</a></li>
+</ul>
