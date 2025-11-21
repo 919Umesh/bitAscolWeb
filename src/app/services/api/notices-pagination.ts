@@ -40,6 +40,15 @@ export class NoticesPaginationService extends AppwriteBaseService {
       throw new Error('Failed to fetch notices: ' + error);
     }
   }
+  async getNoticeById(id: string): Promise<NoticeModelPagination> {
+      try {
+       const result = await this.getDocument('notices', id);
+       console.log(result);
+      return result as unknown as NoticeModelPagination;
+      } catch (error) {
+        throw new Error('Failed to fetch notices: ' + error);
+      }
+    }
 
   
 }

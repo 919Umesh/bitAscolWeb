@@ -95,10 +95,32 @@ Math: any;
     });
   }
 
-  openNotice(notice: NoticeModelPagination) {
-    this.router.navigate(['/notice', notice.$id]);
-  }
+  
 
+  async noticeDirect(noticeId: string) {
+    try {
+      const notice = await this.noticesService.getNoticeById(noticeId);
+      
+      if (notice.file && notice.file) {
+        const link = document.createElement('a');
+        link.href = notice.file;
+        link.download = notice.file || `notice-${noticeId}.pdf`;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        this.error = null;
+        console.log('Notice downloaded successfully:', notice.topic);
+      } else {
+        this.error = 'No file attached to this notice';
+        console.warn('No file available for notice ID:', noticeId);
+      }
+    } catch (error: any) {
+      this.error = 'Failed to download notice: ' + error.message;
+      console.error('Error downloading notice:', error);
+    }
+  }
 
 
   clearError() {
