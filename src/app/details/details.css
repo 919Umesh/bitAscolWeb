@@ -35,7 +35,6 @@
   width: 80px;
   height: 80px;
   background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
   border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
@@ -74,21 +73,18 @@
   font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .tab-button:hover {
   color: var(--primary-color);
   border-color: var(--primary-light);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.15);
 }
 
 .tab-button.active {
   color: white;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  background: var(--primary-color);
   border-color: var(--primary-color);
-  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
 }
 
 /* Tab Content */
@@ -97,12 +93,12 @@
 }
 
 .content-section {
-  animation: fadeIn 0.4s ease-in;
+  animation: fadeIn 0.3s ease-in;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .section-title {
@@ -116,7 +112,7 @@
   font-size: var(--text-lg);
   color: var(--text-secondary);
   margin-bottom: var(--space-8);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 /* Eligibility Section */
@@ -124,23 +120,17 @@
   display: flex;
   gap: var(--space-4);
   padding: var(--space-6);
-  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+  background: #f8f9ff;
   border-radius: var(--radius-lg);
   border-left: 4px solid var(--primary-color);
   margin-bottom: var(--space-6);
-  transition: all 0.3s ease;
-}
-
-.requirement-card:hover {
-  transform: translateX(4px);
-  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.15);
 }
 
 .requirement-number {
   flex-shrink: 0;
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  background: var(--primary-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -148,7 +138,6 @@
   font-size: var(--text-xl);
   font-weight: 700;
   color: white;
-  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
 }
 
 .requirement-content {
@@ -157,7 +146,7 @@
 
 .requirement-text {
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -167,21 +156,7 @@
   font-weight: 600;
   color: var(--primary-color);
   margin: var(--space-6) 0;
-  position: relative;
 }
-
-.divider::before,
-.divider::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 40%;
-  height: 2px;
-  background: linear-gradient(to right, transparent, var(--primary-light), transparent);
-}
-
-.divider::before { left: 0; }
-.divider::after { right: 0; }
 
 .info-box {
   display: flex;
@@ -197,13 +172,12 @@
 .info-box svg {
   flex-shrink: 0;
   color: var(--primary-color);
-  margin-top: 2px;
 }
 
 .info-box p {
   margin: 0;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Course Structure Section */
@@ -217,13 +191,6 @@
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   border: 2px solid var(--bg-gray);
-  transition: all 0.3s ease;
-}
-
-.semester-card:hover {
-  border-color: var(--primary-light);
-  box-shadow: 0 8px 24px rgba(108, 99, 255, 0.12);
-  transform: translateY(-4px);
 }
 
 .semester-header {
@@ -244,7 +211,7 @@
 
 .semester-badge {
   padding: var(--space-2) var(--space-4);
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  background: var(--primary-color);
   color: white;
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
@@ -263,13 +230,6 @@
   gap: var(--space-3);
   padding: var(--space-3);
   color: var(--text-secondary);
-  border-radius: var(--radius-md);
-  transition: all 0.2s ease;
-}
-
-.course-item:hover {
-  background-color: var(--bg-gray);
-  padding-left: var(--space-4);
 }
 
 .course-icon {
@@ -289,15 +249,8 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   border: 2px solid var(--bg-gray);
-  transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
-}
-
-.college-card:hover {
-  border-color: var(--primary-light);
-  box-shadow: 0 16px 40px rgba(108, 99, 255, 0.2);
-  transform: translateY(-8px);
 }
 
 .college-image-container {
@@ -311,19 +264,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.college-card:hover .college-image {
-  transform: scale(1.1);
 }
 
 .college-badge {
   position: absolute;
   top: var(--space-4);
   right: var(--space-4);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: white;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   display: flex;
@@ -332,12 +279,6 @@
   font-size: var(--text-sm);
   font-weight: 600;
   color: #f59e0b;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.college-badge svg {
-  width: 14px;
-  height: 14px;
 }
 
 .college-content {
@@ -368,12 +309,11 @@
 
 .college-year {
   padding: var(--space-2) var(--space-3);
-  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  background: #f0f4ff;
   color: var(--primary-color);
   border-radius: var(--radius-md);
   font-size: var(--text-xs);
   font-weight: 600;
-  white-space: nowrap;
 }
 
 .college-details {
@@ -390,13 +330,6 @@
   color: var(--text-secondary);
   font-size: var(--text-sm);
   padding: var(--space-2);
-  border-radius: var(--radius-md);
-  transition: all 0.2s ease;
-}
-
-.college-detail-item:hover {
-  background-color: var(--bg-gray);
-  padding-left: var(--space-3);
 }
 
 .college-detail-item svg {
@@ -425,18 +358,11 @@
   font-size: var(--text-base);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .contact-button.primary {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  background: var(--primary-color);
   color: white;
-  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
-}
-
-.contact-button.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
 }
 
 .contact-button.secondary {
@@ -445,79 +371,47 @@
   border: 2px solid var(--primary-color);
 }
 
-.contact-button.secondary:hover {
-  background: var(--primary-color);
-  color: white;
-  transform: translateY(-2px);
-}
-
-.contact-button:active {
-  transform: translateY(0);
-}
-
-.contact-button svg {
-  width: 16px;
-  height: 16px;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .details-container {
     padding: var(--space-4);
   }
-
   .header {
     padding: var(--space-6);
   }
-
   .header-content {
     flex-direction: column;
     text-align: center;
     gap: var(--space-4);
   }
-
   .icon-wrapper {
     width: 64px;
     height: 64px;
   }
-
   .title {
     font-size: var(--text-2xl);
   }
-
   .subtitle {
     font-size: var(--text-base);
   }
-
   .tabs {
     flex-direction: column;
     padding: var(--space-3);
   }
-
   .tab-button {
     justify-content: flex-start;
     padding: var(--space-3) var(--space-4);
   }
-
   .tab-content {
     padding: var(--space-6);
   }
-
   .section-title {
     font-size: var(--text-2xl);
   }
-
   .requirement-card {
     flex-direction: column;
-    align-items: flex-start;
   }
-
   .colleges-grid {
     grid-template-columns: 1fr;
-  }
-
-  .divider::before,
-  .divider::after {
-    width: 35%;
   }
 }
