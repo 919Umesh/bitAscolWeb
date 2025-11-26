@@ -2,7 +2,7 @@
 
 <div align="center">
   
-![AscolIT Platform](assets/svg/img1.png)
+![AscolIT Platform](https://raw.githubusercontent.com/919Umesh/bitAscolWeb/main/src/assets/svg/img1.png)
 
 **A comprehensive digital platform built for BIT students at Amrit Science Campus**
 
@@ -44,27 +44,27 @@ AscolIT is a feature-rich web application designed specifically for Bachelor in 
 <div align="center">
 
 ### 🏠 Home Page
-![Home Page](assets/svg/img2.png)
+![Home Page](https://raw.githubusercontent.com/919Umesh/bitAscolWeb/main/src/assets/svg/img2.png)
 *Welcome page with latest notices and quick navigation*
 
 ### 📚 Resources Section
-![Resources](assets/svg/img3.png)
+![Resources](https://raw.githubusercontent.com/919Umesh/bitAscolWeb/main/src/assets/svg/img3.png)
 *Semester-wise organized academic materials*
 
 ### 🖼️ Gallery
-![Gallery](assets/svg/img4.png)
+![Gallery](https://raw.githubusercontent.com/919Umesh/bitAscolWeb/main/src/assets/svg/img4.png)
 *Campus photo collections and facilities*
 
 ### 📋 Course Details
-![Course Details](assets/svg/img5.png)
+![Course Details](https://raw.githubusercontent.com/919Umesh/bitAscolWeb/main/src/assets/svg/img5.png)
 *BIT program information and affiliated colleges*
 
 ### 📄 Notices Section
-![Notices](assets/svg/img6.png)
+![Notices](https://raw.githubusercontent.com/919Umesh/bitAscolWeb/main/src/assets/svg/img6.png)
 *Real-time announcements and updates*
 
 ### 🎯 Subject Resources
-![Subject View](assets/svg/img7.png)
+![Subject View](https://raw.githubusercontent.com/919Umesh/bitAscolWeb/main/src/assets/svg/img7.png)
 *Detailed subject-wise resources and materials*
 
 </div>
@@ -116,7 +116,7 @@ Resources/
 1. **Clone the repository**
    ```bash
    git clone https://github.com/919Umesh/bitAscolWeb.git
-   cd ascol-it
+   cd bitAscolWeb
    ```
 
 2. **Install dependencies**
