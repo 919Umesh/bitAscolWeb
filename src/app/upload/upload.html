@@ -1,0 +1,231 @@
+
+<div class="upload-page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="page-title">
+      <h1 class="title">
+        {{ editMode ? 'Edit Resource' : 'Upload Resource' }}
+      </h1>
+      <p class="subtitle">
+        Add a new resource or update an existing one. Use “Add Semester/Subject” if the lists are empty.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Resource Card -->
+  <section class="card">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <!-- Row: Semester -->
+      <div class="field-group">
+        <label class="label">Semester</label>
+        <div class="row-with-action">
+          <select class="select" formControlName="semester">
+            <option value="">Select Semester</option>
+            <option *ngFor="let sem of semesters" [value]="sem.$id">
+              {{ sem.name }} ({{ sem.code }})
+            </option>
+          </select>
+
+          <button type="button"
+                  class="btn btn-ghost"
+                  (click)="toggleAddSemester()">
+            {{ showAddSemester ? 'Cancel' : 'Add Semester' }}
+          </button>
+        </div>
+        <div class="error" *ngIf="form.get('semester')?.touched && form.get('semester')?.invalid">
+          Semester is required
+        </div>
+      </div>
+
+      <!-- Inline: Add Semester -->
+      <div class="inline-card" *ngIf="showAddSemester">
+        <h4 class="inline-title">Create a new Semester</h4>
+        <div [formGroup]="newSemesterForm" class="inline-body">
+          <div class="grid">
+            <div class="field-group">
+              <label class="label">Name</label>
+              <input class="input" type="text" formControlName="name" placeholder="e.g., Sixth Semester" />
+              <div class="error" *ngIf="newSemesterForm.get('name')?.touched && newSemesterForm.get('name')?.invalid">
+                Name is required
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="label">Code (number)</label>
+              <input class="input" type="number" formControlName="code" placeholder="e.g., 6" />
+              <div class="error" *ngIf="newSemesterForm.get('code')?.touched && newSemesterForm.get('code')?.invalid">
+                Valid code is required
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="label">Description</label>
+            <textarea class="textarea" formControlName="description" placeholder="Short description (optional)"></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn btn-primary" (click)="createSemester()" [disabled]="loading">
+              {{ loading ? 'Creating...' : 'Create Semester' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row: Subject -->
+      <div class="field-group">
+        <label class="label">Subject</label>
+        <div class="row-with-action">
+          <select class="select" formControlName="subject" [disabled]="!subjects.length">
+            <option value="">Select Subject</option>
+            <option *ngFor="let sub of subjects" [value]="sub.$id">
+              {{ sub.name }} ({{ sub.code }})
+            </option>
+          </select>
+
+          <button type="button"
+                  class="btn btn-ghost"
+                  (click)="toggleAddSubject()"
+                  [disabled]="!form.value.semester">
+            {{ showAddSubject ? 'Cancel' : 'Add Subject' }}
+          </button>
+        </div>
+        <div class="error" *ngIf="form.get('subject')?.touched && form.get('subject')?.invalid">
+          Subject is required
+        </div>
+      </div>
+
+      <!-- Inline: Add Subject -->
+      <div class="inline-card" *ngIf="showAddSubject">
+        <h4 class="inline-title">Create a new Subject</h4>
+        <div [formGroup]="newSubjectForm" class="inline-body">
+          <div class="grid">
+            <div class="field-group">
+              <label class="label">Name</label>
+              <input class="input" type="text" formControlName="name" placeholder="e.g., Multimedia Computing" />
+              <div class="error" *ngIf="newSubjectForm.get('name')?.touched && newSubjectForm.get('name')?.invalid">
+                Name is required
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="label">Code</label>
+              <input class="input" type="text" formControlName="code" placeholder="e.g., BIT356" />
+              <div class="error" *ngIf="newSubjectForm.get('code')?.touched && newSubjectForm.get('code')?.invalid">
+                Code is required
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="label">Description</label>
+            <textarea class="textarea" formControlName="description" placeholder="Short description (optional)"></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn btn-primary" (click)="createSubject()" [disabled]="loading || !form.value.semester">
+              {{ loading ? 'Creating...' : 'Create Subject' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row: Type + Year -->
+      <div class="grid two">
+        <div class="field-group">
+          <label class="label">Type</label>
+          <select class="select" formControlName="resource_type">
+            <option value="question">Question</option>
+            <option value="note">Note</option>
+            <option value="syllabus">Syllabus</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="label">Year (optional)</label>
+          <input class="input" type="number" formControlName="year" placeholder="e.g., 2025" />
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="field-group">
+        <label class="label">Title</label>
+        <input class="input" type="text" formControlName="title" placeholder="Title" />
+        <div class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+          Title is required (max 120 chars)
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="field-group">
+        <label class="label">Description</label>
+        <textarea class="textarea" formControlName="description" placeholder="Description (optional)"></textarea>
+      </div>
+
+      <!-- File -->
+      <div class="field-group">
+        <label class="label">{{ editMode ? 'Replace File (optional)' : 'Upload File' }}</label>
+        <input class="input-file" type="file" accept=".pdf,.doc,.docx" (change)="onFileChange($event)" />
+        <div class="current-file" *ngIf="editMode && currentFileDoc?.file_url">
+          Current file:
+          <a [href]="currentFileDoc.file_url" target="_blank" rel="noopener">
+            {{ currentFileDoc.file_title || 'View' }}
+          </a>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary" [disabled]="loading">
+          {{ loading ? (editMode ? 'Updating...' : 'Uploading...') : (editMode ? 'Update Resource' : 'Upload Resource') }}
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Notice Card -->
+  <section class="card" *ngIf="noticeForm">
+    <h2 class="card-title">Post Notice (PDF)</h2>
+    <div [formGroup]="noticeForm" class="card-body">
+      <div class="field-group">
+        <label class="label">Topic</label>
+        <input class="input" type="text" formControlName="topic" placeholder="e.g., Exam Form Deadline" />
+      </div>
+
+      <div class="field-group">
+        <label class="label">Attach PDF</label>
+        <input class="input-file" type="file" accept="application/pdf,.pdf" (change)="onNoticeFileChange($event)" />
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-primary" (click)="postNoticeWithFile()" [disabled]="submittingNotice">
+          {{ submittingNotice ? 'Posting...' : 'Post Notice' }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Card -->
+  <section class="card" *ngIf="galleryForm">
+    <h2 class="card-title">Upload Gallery Photo</h2>
+    <div [formGroup]="galleryForm" class="card-body">
+      <div class="field-group">
+        <label class="label">Title</label>
+        <input class="input" type="text" formControlName="title" placeholder="e.g., BIT Fest 2081" />
+        <div class="error" *ngIf="galleryForm.get('title')?.touched && galleryForm.get('title')?.invalid">
+          Title is required
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="label">Choose Image</label>
+        <input class="input-file" type="file" accept="image/*" (change)="onGalleryFileChange($event)" />
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-primary" (click)="uploadGalleryImage()" [disabled]="uploadingGallery">
+          {{ uploadingGallery ? 'Uploading...' : 'Upload Photo' }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>

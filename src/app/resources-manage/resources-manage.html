@@ -1,0 +1,120 @@
+
+<div class="manage-page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="page-title">
+      <h1 class="title">Manage Resources</h1>
+      <p class="subtitle">Filter by semester, subject, and type. Edit or open a resource quickly.</p>
+    </div>
+
+    <a class="btn btn-primary" [routerLink]="['/resources', 'new']">
+      + New Resource
+    </a>
+  </header>
+
+  <!-- Filters Card -->
+  <section class="card">
+    <form [formGroup]="filterForm" class="filters">
+      <div class="grid three">
+        <div class="field-group">
+          <label class="label">Semester</label>
+          <select class="select" formControlName="semester">
+            <option value="">All / Select</option>
+            <option *ngFor="let sem of semesters" [value]="sem.$id">
+              {{ sem.name }} ({{ sem.code }})
+            </option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="label">Subject</label>
+          <select class="select" formControlName="subject" [disabled]="!filterForm.value.semester">
+            <option value="">All / Select</option>
+            <option *ngFor="let s of subjects" [value]="s.$id">
+              {{ s.name }} ({{ s.code }})
+            </option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="label">Type</label>
+          <select class="select" formControlName="resource_type">
+            <option value="question">Question</option>
+            <option value="note">Note</option>
+            <option value="syllabus">Syllabus</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- Results Card -->
+  <section class="card">
+    <h2 class="card-title">Results</h2>
+
+    <!-- Results -->
+    <div class="table-wrap" *ngIf="!loading; else loadingTpl">
+      <table *ngIf="rows.length; else emptyTpl" class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Subject</th>
+            <th>Year</th>
+            <th>Created</th>
+            <th class="th-actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of rows; trackBy: trackById">
+            <td class="cell-title">
+              <span class="title-strong">{{ r.title }}</span>
+            </td>
+
+            <td>
+              <span class="badge"
+                    [ngClass]="{
+                      'badge-note': r.resource_type === 'note',
+                      'badge-question': r.resource_type === 'question',
+                      'badge-syllabus': r.resource_type === 'syllabus'
+                    }">
+                {{ r.resource_type }}
+              </span>
+            </td>
+
+            <td class="cell-subject">
+              {{ subjectName(r.subjects) }}
+              <small class="muted" *ngIf="subjectCode(r.subjects)">
+                ({{ subjectCode(r.subjects) }})
+              </small>
+            </td>
+
+            <td>{{ r.year || '—' }}</td>
+            <td>{{ r.$createdAt | date: 'medium' }}</td>
+
+            <td class="actions">
+              <a class="btn btn-ghost btn-sm" [routerLink]="['/resources', r.$id, 'edit']">Edit</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Loading -->
+    <ng-template #loadingTpl>
+      <div class="state state-loading">
+        <span class="spinner"></span>
+        Loading…
+      </div>
+    </ng-template>
+
+    <!-- Empty -->
+    <ng-template #emptyTpl>
+      <div class="state state-empty">
+        <p>No resources found. Adjust filters.</p>
+      </div>
+    </ng-template>
+  </section>
+
+</div>

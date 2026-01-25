@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NoticesPagination } from './notices-pagination';
+import { NoticesPaginationService } from './notices-pagination';
 
 describe('NoticesPagination', () => {
-  let service: NoticesPagination;
+  let service: NoticesPaginationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(NoticesPagination);
+    service = TestBed.inject(NoticesPaginationService);
   });
 
   it('should be created', () => {

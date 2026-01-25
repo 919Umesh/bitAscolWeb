@@ -1,27 +1,68 @@
+
 <nav class="navbar">
-  <div class="nav-brand">
+  <!-- LEFT: Brand -->
+  <div class="nav-left">
     <a routerLink="/" class="nav-brand-link">
-      <img src="assets/svg/bit.svg" alt="BIT ASCOL Logo" class="nav-logo">
+      <img src="assets/svg/bit.svg" alt="BIT ASCOL Logo" class="nav-logo" />
       <h3 class="nav-brand-text">BIT ASCOL</h3>
     </a>
   </div>
 
-  <!-- Desktop Links (center) -->
-  <ul class="nav-links-center">
-    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+  <!-- CENTER: Main Links (Desktop) -->
+  <ul class="nav-center">
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
     <li><a routerLink="/resources" routerLinkActive="active">Resources</a></li>
     <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
     <li><a routerLink="/details" routerLinkActive="active">Details</a></li>
   </ul>
 
-  <!-- Mobile Menu Button -->
-  <div class="menu-btn" (click)="toggleMenu()">☰</div>
+  <!-- RIGHT: Auth Actions (Desktop) -->
+  <ul class="nav-right">
+    <li *ngIf="auth.isLoggedIn()">
+      <a routerLink="/resources/new">Upload</a>
+    </li>
+    
+
+    <li *ngIf="auth.isLoggedIn()">
+      <a routerLink="/resources/manage">Manage</a>
+    </li>
+
+    <li *ngIf="!auth.isLoggedIn()">
+      <a routerLink="/login">Login</a>
+    </li>
+
+    <li *ngIf="auth.isLoggedIn()">
+      <a (click)="logout()" class="logout">Logout</a>
+    </li>
+  </ul>
+
+  <!-- MOBILE MENU BUTTON -->
+  <button class="menu-btn" (click)="toggleMenu()">☰</button>
 </nav>
 
-<!-- Mobile Dropdown Menu -->
-<ul *ngIf="menuOpen" class="nav-links-mobile">
-  <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
-  <li><a routerLink="/resources" routerLinkActive="active" (click)="closeMenu()">Resources</a></li>
-  <li><a routerLink="/gallery" routerLinkActive="active" (click)="closeMenu()">Gallery</a></li>
-  <li><a routerLink="/details" routerLinkActive="active" (click)="closeMenu()">Details</a></li>
+<!-- MOBILE MENU -->
+<ul *ngIf="menuOpen" class="nav-mobile">
+  <li><a routerLink="/" (click)="closeMenu()">Home</a></li>
+  <li><a routerLink="/resources" (click)="closeMenu()">Resources</a></li>
+  <li><a routerLink="/gallery" (click)="closeMenu()">Gallery</a></li>
+  <li><a routerLink="/details" (click)="closeMenu()">Details</a></li>
+
+
+  <li *ngIf="auth.isLoggedIn()">
+    <a routerLink="/resources/new" (click)="closeMenu()">Upload</a>
+  </li>
+
+  <li *ngIf="auth.isLoggedIn()">
+    <a routerLink="/resources/manage" (click)="closeMenu()">Manage</a>
+  </li>
+
+  <!-- Login -->
+  <li *ngIf="!auth.isLoggedIn()">
+    <a routerLink="/login" (click)="closeMenu()">Login</a>
+  </li>
+
+  <!-- Logout -->
+  <li *ngIf="auth.isLoggedIn()">
+    <a (click)="logout()">Logout</a>
+  </li>
 </ul>
