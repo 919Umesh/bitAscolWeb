@@ -187,7 +187,6 @@
   gap: var(--space-4);
   padding: var(--space-6);
   border-radius: 1.75rem;
-  background: var(--bg-white);
   border: 1px solid rgba(108,99,255,0.12);
   box-shadow: 0 10px 36px rgba(0,0,0,0.08);
   transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;

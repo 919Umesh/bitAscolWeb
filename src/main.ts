@@ -5,10 +5,9 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { App } from './app/app';
 
-/* Apply saved theme BEFORE Angular boots */
 (function primeTheme() {
   const LS_KEY = 'theme.mode';
-  let saved: 'light' | 'dark' | 'system' = 'system';
+  let saved: 'light' | 'dark' | 'system' = 'light';
   try {
     const v = localStorage.getItem(LS_KEY) as any;
     if (v === 'light' || v === 'dark' || v === 'system') saved = v;
