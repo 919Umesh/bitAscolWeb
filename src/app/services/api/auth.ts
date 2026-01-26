@@ -1,15 +1,16 @@
-import { Injectable, signal } from '@angular/core';
+
+import { Injectable, signal, computed } from '@angular/core';
 import { Client, Account, Models } from 'appwrite';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class Auth {
   private client = new Client();
   private account: Account;
 
   user = signal<Models.User<Models.Preferences> | null>(null);
   loading = signal(true);
+
+  isLoggedIn = computed(() => this.user() !== null);
 
   constructor() {
     this.client
@@ -21,9 +22,10 @@ export class Auth {
   }
 
   async loadUser() {
+    this.loading.set(true);
     try {
-      const user = await this.account.get();
-      this.user.set(user);
+      const u = await this.account.get();
+      this.user.set(u);
     } catch {
       this.user.set(null);
     } finally {
@@ -37,11 +39,10 @@ export class Auth {
   }
 
   async logout() {
-    await this.account.deleteSession('current');
-    this.user.set(null);
-  }
-
-  isLoggedIn() {
-    return this.user() !== null;
+    try {
+      await this.account.deleteSession('current');
+    } finally {
+      this.user.set(null);
+    }
   }
 }

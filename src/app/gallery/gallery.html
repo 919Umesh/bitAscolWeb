@@ -1,50 +1,54 @@
+
 <div class="gallery-container">
-  <!-- Error Message -->
+
+  <!-- Error -->
   <div *ngIf="error" class="error-banner">
     <div class="error-content">
       <span class="error-icon">⚠️</span>
       <span class="error-text">{{ error }}</span>
     </div>
-    <button (click)="error = ''" class="error-close">×</button>
+    <button (click)="error = ''" class="error-close" type="button">×</button>
   </div>
 
   <!-- Loading -->
   <div *ngIf="loading" class="loading-state">
-    <div class="spinner"></div>
+    <div class="spinner" aria-hidden="true"></div>
     <p>Loading gallery...</p>
   </div>
 
   <div class="gallery-content">
-    <!-- Gallery Header -->
+    <!-- Header -->
     <div class="gallery-header">
       <h1 class="gallery-title">Photo Gallery</h1>
-      <p class="gallery-description">Explore our collection of photos and images</p>
+      <p class="gallery-description">Explore our beautiful collection of campus images</p>
+
       <div class="gallery-stats" *ngIf="!loading && photos.length > 0">
         <span class="photo-count">{{ photos.length }} photos</span>
       </div>
     </div>
 
-    <!-- Photos Grid -->
+    <!-- Grid -->
     <div *ngIf="!loading && photos.length > 0" class="photos-grid">
-      <div 
-        *ngFor="let photo of photos" 
+      <div
+        *ngFor="let photo of photos"
         class="photo-card"
-        (click)="downloadPhoto(photo)">
+        (click)="downloadPhoto(photo)"
+        tabindex="0"
+        role="button"
+        aria-label="Download {{ photo.title || 'photo ' + photo.$id }}"
+      >
         <div class="photo-image">
-          <img [src]="photo.file_url" [alt]="photo.title || 'Gallery photo ' + photo.$id" loading="lazy">
-          <div class="photo-overlay">
-            <div class="overlay-content">
-              <button class="download-btn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                  <polyline points="7 10 12 15 17 10"></polyline>
-                  <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                Download
-              </button>
-            </div>
+          <img
+            [src]="photo.file_url"
+            [alt]="photo.title || 'Photo ' + photo.$id"
+            loading="lazy"
+          />
+          <!-- overlay intentionally kept in DOM but visually disabled by CSS -->
+          <div class="photo-overlay" aria-hidden="true">
+            <button class="download-btn" type="button">Download</button>
           </div>
         </div>
+
         <div class="photo-info">
           <h3 class="photo-title">{{ photo.title || 'Untitled' }}</h3>
           <div class="photo-meta">
@@ -55,12 +59,12 @@
       </div>
     </div>
 
-    <!-- Empty State -->
+    <!-- Empty -->
     <div *ngIf="!loading && photos.length === 0" class="empty-state">
-      <div class="empty-icon">📷</div>
+      <div class="empty-icon" aria-hidden="true">📷</div>
       <h2 class="empty-title">No photos found</h2>
-      <p class="empty-text">There are no photos available in the gallery at the moment.</p>
-      <button (click)="loadPhotos()" class="retry-btn">Refresh Gallery</button>
+      <p class="empty-text">There are no photos available currently.</p>
+      <button (click)="loadPhotos()" class="retry-btn" type="button">Refresh Gallery</button>
     </div>
   </div>
 </div>

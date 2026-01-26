@@ -1,0 +1,44 @@
+
+/* theme.css */
+:root[data-theme="dark"] .home-container { background: var(--bg-dark); color: #e5e7eb; }
+:root[data-theme="dark"] .hero-badge { background: rgba(99, 102, 241, .18); color: #c7d2fe; }
+:root[data-theme="dark"] .btn-secondary { background: #0f131a; color: #e2e8f0; border-color: rgba(255,255,255,.12); }
+:root[data-theme="dark"] .visual-status { background: #141821; border-color: rgba(255,255,255,.12); }
+:root[data-theme="dark"] .avatar { border-color: #0b0f18; }
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] .home-container { background: var(--bg-dark); color: #e5e7eb; }
+  :root[data-theme="system"] .hero-badge { background: rgba(99, 102, 241, .18); color: #c7d2fe; }
+  :root[data-theme="system"] .btn-secondary { background: #0f131a; color: #e2e8f0; border-color: rgba(255,255,255,.12); }
+  :root[data-theme="system"] .visual-status { background: #141821; border-color: rgba(255,255,255,.12); }
+  :root[data-theme="system"] .avatar { border-color: #0b0f18; }
+}
+
+
+
+
+
+
+/* Light theme glass rim — slightly stronger so it reads on bright bg */
+.glass-nav {
+  background: transparent;                  /* keep transparent to avoid seam */
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+
+  /* Stronger rim: was 0.20; 0.28 looks better but still subtle */
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+/* Dark/system rim — keep subtle but visible */
+:root[data-theme="dark"] .glass-nav {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"] .glass-nav {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+}
+
+

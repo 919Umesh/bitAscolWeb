@@ -9,7 +9,12 @@ body {
   line-height: 1.6;
 }
 
+
+
+
+/* app.css */
 .main-content {
-  margin-top: 100px;
+  padding-top: var(--nav-clear); /* computes exact navbar clearance */
   min-height: calc(100vh - 120px);
 }
+

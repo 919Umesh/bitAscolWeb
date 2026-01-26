@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 import { NoticeModel } from '../models/notices';
 import { NoticesService } from '../services/api/notices';
 import { SafeResourceUrl,DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
   imports: [], 
   templateUrl: './home.html',
   styleUrl: './home.css',
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Home implements OnInit {
   notices: NoticeModel[] = [];
@@ -46,6 +48,9 @@ openMoreResource() {
   this.router.navigate(['/resources']);
 }
 
+openGallery() {
+  this.router.navigate(['/gallery']);
+}
   async downloadNoticeDirect(noticeId: string) {
     try {
       const notice = await this.noticesService.getNoticeById(noticeId);

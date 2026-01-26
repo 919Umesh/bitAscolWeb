@@ -1,68 +1,55 @@
-
-<nav class="navbar">
-  <!-- LEFT: Brand -->
+<nav class="navbar glass-nav">
   <div class="nav-left">
     <a routerLink="/" class="nav-brand-link">
-      <img src="assets/svg/bit.svg" alt="BIT ASCOL Logo" class="nav-logo" />
-      <h3 class="nav-brand-text">BIT ASCOL</h3>
+      <div class="brand-badge">
+        <img src="assets/svg/laptop.svg" alt="BIT ASCOL Logo" class="brand-badge-img" />
+      </div>
+      <h3 class="nav-brand-text">
+        BIT <span class="brand-strong">ASCOL</span>
+      </h3>
     </a>
   </div>
 
-  <!-- CENTER: Main Links (Desktop) -->
   <ul class="nav-center">
     <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
     <li><a routerLink="/resources" routerLinkActive="active">Resources</a></li>
     <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
     <li><a routerLink="/details" routerLinkActive="active">Details</a></li>
+    <li *ngIf="auth.isLoggedIn()"><a routerLink="/resources/new" class="pill">Upload</a></li>
+    <li *ngIf="auth.isLoggedIn()"><a routerLink="/resources/manage" class="pill">Manage</a></li>
   </ul>
 
-  <!-- RIGHT: Auth Actions (Desktop) -->
-  <ul class="nav-right">
-    <li *ngIf="auth.isLoggedIn()">
-      <a routerLink="/resources/new">Upload</a>
-    </li>
-    
 
-    <li *ngIf="auth.isLoggedIn()">
-      <a routerLink="/resources/manage">Manage</a>
-    </li>
+  <ul class="nav-right">
+    
+<li>
+  <button class="icon-btn theme-toggle" (click)="toggleTheme()" aria-label="Toggle theme">
+    <span class="material-symbols-rounded icon-sun" aria-hidden="true">light_mode</span>
+    <span class="material-symbols-rounded icon-moon" aria-hidden="true">dark_mode</span>
+  </button>
+</li>
+
 
     <li *ngIf="!auth.isLoggedIn()">
-      <a routerLink="/login">Login</a>
+      <a routerLink="/login" class="btn-primary-mini">Login</a>
     </li>
 
     <li *ngIf="auth.isLoggedIn()">
-      <a (click)="logout()" class="logout">Logout</a>
+      <a (click)="logout()" class="btn-primary-mini logout">Logout</a>
     </li>
   </ul>
 
-  <!-- MOBILE MENU BUTTON -->
-  <button class="menu-btn" (click)="toggleMenu()">☰</button>
+  <button class="menu-btn" (click)="toggleMenu()" aria-label="Open menu">☰</button>
 </nav>
 
-<!-- MOBILE MENU -->
-<ul *ngIf="menuOpen" class="nav-mobile">
+
+<ul *ngIf="menuOpen" class="nav-mobile glass-nav">
   <li><a routerLink="/" (click)="closeMenu()">Home</a></li>
   <li><a routerLink="/resources" (click)="closeMenu()">Resources</a></li>
   <li><a routerLink="/gallery" (click)="closeMenu()">Gallery</a></li>
   <li><a routerLink="/details" (click)="closeMenu()">Details</a></li>
-
-
-  <li *ngIf="auth.isLoggedIn()">
-    <a routerLink="/resources/new" (click)="closeMenu()">Upload</a>
-  </li>
-
-  <li *ngIf="auth.isLoggedIn()">
-    <a routerLink="/resources/manage" (click)="closeMenu()">Manage</a>
-  </li>
-
-  <!-- Login -->
-  <li *ngIf="!auth.isLoggedIn()">
-    <a routerLink="/login" (click)="closeMenu()">Login</a>
-  </li>
-
-  <!-- Logout -->
-  <li *ngIf="auth.isLoggedIn()">
-    <a (click)="logout()">Logout</a>
-  </li>
+  <li *ngIf="auth.isLoggedIn()"><a routerLink="/resources/new" (click)="closeMenu()">Upload</a></li>
+  <li *ngIf="auth.isLoggedIn()"><a routerLink="/resources/manage" (click)="closeMenu()">Manage</a></li>
+  <li *ngIf="!auth.isLoggedIn()"><a routerLink="/login" (click)="closeMenu()">Login</a></li>
+  <li *ngIf="auth.isLoggedIn()"><a (click)="logout()">Logout</a></li>
 </ul>
