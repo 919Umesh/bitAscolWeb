@@ -2,8 +2,13 @@
   <div class="nav-left">
     <a routerLink="/" class="nav-brand-link">
       <div class="brand-badge">
-        <img src="assets/svg/laptop.svg" alt="BIT ASCOL Logo" class="brand-badge-img" />
+        <img
+          src="assets/svg/laptop.svg"
+          alt="BIT ASCOL Logo"
+          class="brand-badge-img"
+        />
       </div>
+
       <h3 class="nav-brand-text">
         BIT <span class="brand-strong">ASCOL</span>
       </h3>
@@ -11,24 +16,41 @@
   </div>
 
   <ul class="nav-center">
-    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+    <li>
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+    </li>
     <li><a routerLink="/resources" routerLinkActive="active">Resources</a></li>
     <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
     <li><a routerLink="/details" routerLinkActive="active">Details</a></li>
-    <li *ngIf="auth.isLoggedIn()"><a routerLink="/resources/new" class="pill">Upload</a></li>
-    <li *ngIf="auth.isLoggedIn()"><a routerLink="/resources/manage" class="pill">Manage</a></li>
+
+    <li *ngIf="auth.isLoggedIn()">
+      <a routerLink="/resources/new" class="pill">Upload</a>
+    </li>
+    <li *ngIf="auth.isLoggedIn()">
+      <a routerLink="/resources/manage" class="pill">Manage</a>
+    </li>
   </ul>
 
-
   <ul class="nav-right">
-    
-<li>
-  <button class="icon-btn theme-toggle" (click)="toggleTheme()" aria-label="Toggle theme">
-    <span class="material-symbols-rounded icon-sun" aria-hidden="true">light_mode</span>
-    <span class="material-symbols-rounded icon-moon" aria-hidden="true">dark_mode</span>
-  </button>
-</li>
-
+    <li>
+      <button
+        class="icon-btn theme-toggle"
+        (click)="toggleTheme()"
+        aria-label="Toggle theme"
+      >
+        <span class="material-symbols-rounded icon-sun" aria-hidden="true"
+          >light_mode</span
+        >
+        <span class="material-symbols-rounded icon-moon" aria-hidden="true"
+          >dark_mode</span
+        >
+      </button>
+    </li>
 
     <li *ngIf="!auth.isLoggedIn()">
       <a routerLink="/login" class="btn-primary-mini">Login</a>
@@ -39,17 +61,47 @@
     </li>
   </ul>
 
-  <button class="menu-btn" (click)="toggleMenu()" aria-label="Open menu">☰</button>
+  <button class="menu-btn" (click)="toggleMenu()" aria-label="Open menu">
+    ☰
+  </button>
 </nav>
 
 
-<ul *ngIf="menuOpen" class="nav-mobile glass-nav">
-  <li><a routerLink="/" (click)="closeMenu()">Home</a></li>
-  <li><a routerLink="/resources" (click)="closeMenu()">Resources</a></li>
-  <li><a routerLink="/gallery" (click)="closeMenu()">Gallery</a></li>
-  <li><a routerLink="/details" (click)="closeMenu()">Details</a></li>
-  <li *ngIf="auth.isLoggedIn()"><a routerLink="/resources/new" (click)="closeMenu()">Upload</a></li>
-  <li *ngIf="auth.isLoggedIn()"><a routerLink="/resources/manage" (click)="closeMenu()">Manage</a></li>
-  <li *ngIf="!auth.isLoggedIn()"><a routerLink="/login" (click)="closeMenu()">Login</a></li>
-  <li *ngIf="auth.isLoggedIn()"><a (click)="logout()">Logout</a></li>
+<ul *ngIf="menuOpen" class="nav-mobile">
+  <!--glass-nav-->
+  <li class="mobile-theme-item">
+    <button
+      class="icon-btn theme-toggle mobile-theme-toggle"
+      (click)="changeThemeMethod()"
+      aria-label="Toggle theme"
+    >
+      <span class="material-symbols-rounded icon-sun" aria-hidden="true"
+        >light_mode</span
+      >
+      <span class="material-symbols-rounded icon-moon" aria-hidden="true"
+        >dark_mode</span
+      >
+    </button>
+    <span class="mobile-theme-label">Theme</span>
+  </li>
+
+  <li><a routerLink="/" (click)="closeMenu()">
+    <span class="material-symbols-rounded nav-i">home</span>Home</a></li>
+  <li><a routerLink="/resources" (click)="closeMenu()"><span class="material-symbols-rounded nav-i">menu_book</span>Resources</a></li>
+  <li><a routerLink="/gallery" (click)="closeMenu()"><span class="material-symbols-rounded nav-i">photo_library</span>Gallery</a></li>
+  <li><a routerLink="/details" (click)="closeMenu()"><span class="material-symbols-rounded nav-i">info</span>Details</a></li>
+
+  <li *ngIf="auth.isLoggedIn()">
+    <a routerLink="/resources/new" (click)="closeMenu()">Upload</a>
+  </li>
+  <li *ngIf="auth.isLoggedIn()">
+    <a routerLink="/resources/manage" (click)="closeMenu()">Manage</a>
+  </li>
+
+  <li *ngIf="!auth.isLoggedIn()">
+    <a routerLink="/login" (click)="closeMenu()"><span class="material-symbols-rounded nav-i">login</span>Login</a>
+  </li>
+  <li *ngIf="auth.isLoggedIn()">
+    <a (click)="logout()"><span class="material-symbols-rounded nav-i">logout</span>Logout</a>
+  </li>
 </ul>

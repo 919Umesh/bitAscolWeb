@@ -1,7 +1,6 @@
-
 import { Injectable, effect, signal } from '@angular/core';
 
-type ThemeMode = 'light' | 'dark' | 'system';
+type ThemeMode = 'light' | 'dark';
 const LS_KEY = 'theme.mode';
 
 @Injectable({ providedIn: 'root' })
@@ -11,44 +10,37 @@ export class ThemeService {
   private apply = effect(() => {
     const m = this.mode();
     const root = document.documentElement;
-
     root.setAttribute('data-theme', m);
+    root.style.colorScheme = m;
 
-    const dark =
-      m === 'dark' ||
-      (m === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    root.style.colorScheme = dark ? 'dark' : 'light';
+    try {
+      localStorage.setItem(LS_KEY, m);
+    } catch {
 
-    try { localStorage.setItem(LS_KEY, m); } catch {}
+    }
   });
 
-  constructor() {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    mq.addEventListener?.('change', () => {
-      if (this.mode() === 'system') this.mode.set('system'); // re-trigger effect
-    });
+  constructor() { }
+  setLight() {
+    this.mode.set('light');
   }
-
-  setLight() { this.mode.set('light'); }
-  setDark() { this.mode.set('dark'); }
-  setSystem() { this.mode.set('system'); }
+  setDark() {
+    this.mode.set('dark');
+  }
   toggle() {
-    const current = this.resolvedMode();
-    this.mode.set(current === 'dark' ? 'light' : 'dark');
+    this.mode.set(this.mode() === 'dark' ? 'light' : 'dark');
   }
-
-  resolvedMode(): 'light' | 'dark' {
-    if (this.mode() === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    return this.mode() as 'light' | 'dark';
+  resolvedMode(): ThemeMode {
+    return this.mode();
   }
 
   private readInitialMode(): ThemeMode {
     try {
-      const saved = localStorage.getItem(LS_KEY) as ThemeMode | null;
-      if (saved === 'light' || saved === 'dark' || saved === 'system') return saved;
-    } catch {}
-    return 'system';
+      const saved = localStorage.getItem(LS_KEY);
+      if (saved === 'dark') return 'dark';
+      if (saved === 'light') return 'light';
+    } catch {
+    }
+    return 'light';
   }
 }

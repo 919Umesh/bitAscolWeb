@@ -21,6 +21,11 @@ export class Navbar {
   toggleMenu() { this.menuOpen = !this.menuOpen; }
   closeMenu() { this.menuOpen = false; }
   toggleTheme() { this.theme.toggle(); }
+ 
+ changeThemeMethod() {
+    this.toggleTheme();
+    this.closeMenu();
+  }
 
   async logout() {
     await this.auth.logout();
