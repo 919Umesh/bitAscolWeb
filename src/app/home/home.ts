@@ -1,5 +1,5 @@
 import { Component, OnInit ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-
+import { Meta } from '@angular/platform-browser';
 import { NoticeModel } from '../models/notices';
 import { NoticesService } from '../services/api/notices';
 import { SafeResourceUrl,DomSanitizer } from '@angular/platform-browser';
@@ -20,9 +20,16 @@ export class Home implements OnInit {
   showNoticeDetails = false;
   error: string | null = null;
 
- constructor(private noticesService: NoticesService,private sanitizer: DomSanitizer,private router: Router) {}
+ constructor(
+   private noticesService: NoticesService,
+   private sanitizer: DomSanitizer,
+   private router: Router,
+   private meta: Meta
+ ) {}
 
  async ngOnInit() {
+    this.meta.updateTag({ name: 'description', content: 'Official student portal for BIT at Amrit Science Campus (ASCOL), TU Nepal. Access study notes, question papers, syllabus, campus notices and photo gallery.' });
+    this.meta.updateTag({ property: 'og:description', content: 'Official student portal for BIT at Amrit Science Campus (ASCOL), TU Nepal. Access study notes, question papers, syllabus, campus notices and photo gallery.' });
     try {
       const response = await this.noticesService.getNotices();
       this.notices = response.data;

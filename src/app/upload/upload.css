@@ -2,7 +2,7 @@
 /* Page wrapper */
 .upload-page {
   max-width: 980px;
-  margin: var(--space-8) auto;
+  margin: clamp(1.5rem, 4vw, 2.5rem) auto;
   padding: 0 var(--space-4);
   font-family: var(--font-family);
   color: var(--text-primary);

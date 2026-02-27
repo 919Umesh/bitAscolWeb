@@ -28,7 +28,7 @@
 
 .hero {
   position: relative; z-index: 1; max-width: 1200px;
-  margin: 110px auto 0; 
+  margin: clamp(1.5rem, 4vw, 3rem) auto 0; 
   display: grid; grid-template-columns: 1.05fr .95fr;
   gap: clamp(var(--space-6), 5vw, var(--space-8)); align-items: center;
 }
@@ -144,7 +144,7 @@
 
 
 @media (max-width: 1024px) {
-  .hero { grid-template-columns: 1fr; margin-top: 120px; }
+  .hero { grid-template-columns: 1fr; margin-top: 1.5rem; }
   .hero-visual { order: -1; min-height: auto; }
   .hero-visual .visual-status { position: absolute; left: 8px; bottom: 12px; }
   .hero-visual .visual-badge { right: 0; top: 0; }

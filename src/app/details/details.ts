@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details',
@@ -7,8 +8,14 @@ import { Component } from '@angular/core';
   templateUrl: './details.html',
   styleUrl: './details.css',
 })
-export class Details {
+export class Details implements OnInit {
   activeTab: string = 'eligibility';
+
+  constructor(private meta: Meta) {}
+
+  ngOnInit() {
+    this.meta.updateTag({ name: 'description', content: 'Complete details of Bachelor of Information Technology (BIT) under TU Nepal: eligibility criteria, 8-semester course structure, electives, and list of affiliated colleges.' });
+  }
 
   eligibilityRequirements = [
     {

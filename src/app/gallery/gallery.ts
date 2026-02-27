@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Meta } from '@angular/platform-browser';
 import { GalleryModel } from '../models/gallery';
 import { GalleryService } from '../services/api/gallery';
 
@@ -14,9 +15,10 @@ export class Gallery implements OnInit {
   loading = false;
   error = '';
 
-  constructor(private galleryService: GalleryService) {}
+  constructor(private galleryService: GalleryService, private meta: Meta) {}
 
   async ngOnInit() {
+    this.meta.updateTag({ name: 'description', content: 'Photo gallery from Amrit Science Campus (ASCOL) BIT program events, fests and campus life. Browse campus photos uploaded by students.' });
     await this.loadPhotos();
   }
 

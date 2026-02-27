@@ -3,7 +3,6 @@
    Container
    ============================ */
 .gallery-container {
-  margin-top: var(--nav-clear);
   padding: clamp(var(--space-6), 3vw, var(--space-8));
   background: transparent;
   color: var(--text-primary);
@@ -27,6 +26,7 @@
   font-weight: 800;
   background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: var(--space-3);
 }

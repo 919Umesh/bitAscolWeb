@@ -14,7 +14,8 @@ export class NoticesService extends AppwriteBaseService {
         AppwriteBaseService.orderDesc('$createdAt'),
         AppwriteBaseService.limit(limit)
       ]);
-     
+     console.log('Fetched notes:', result);
+       console.log('Fetched notes:', result.documents);
       const notices = result.documents as unknown as NoticeModel[];
       
       return {

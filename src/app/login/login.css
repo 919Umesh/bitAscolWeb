@@ -1,6 +1,6 @@
 .login-container {
   max-width: 450px;
-  margin: 160px auto; /* Increased margin to clear fixed navbar */
+  margin: clamp(2rem, 6vw, 4rem) auto;
   padding: var(--space-8);
   border-radius: var(--radius-xl);
   background: var(--bg-white);

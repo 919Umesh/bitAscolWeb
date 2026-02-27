@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Meta } from '@angular/platform-browser';
 import { SemesterModel, SubjectModel, ResourceModel, ResourceWithFiles } from '../models/resources';
 import { ResourcesService } from '../services/api/resources';
 
@@ -33,9 +34,10 @@ export class Resources implements OnInit {
   // Resource types array
   resourceTypes: ('question' | 'note' | 'syllabus')[] = ['question', 'note', 'syllabus'];
 
-  constructor(private resourcesService: ResourcesService) {}
+  constructor(private resourcesService: ResourcesService, private meta: Meta) {}
 
   ngOnInit() {
+    this.meta.updateTag({ name: 'description', content: 'Download free study notes, past question papers, and syllabus for all 8 semesters of BIT at ASCOL, TU Nepal. Select your semester and subject to find resources.' });
     this.loadSemesters();
   }
 

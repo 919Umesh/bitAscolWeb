@@ -1,0 +1,15 @@
+# robots.txt – BIT ASCOL Student Portal
+# https://ascol.vercel.app/
+
+User-agent: *
+Allow: /
+
+# Block admin routes from indexing
+Disallow: /login
+Disallow: /resources/new
+Disallow: /resources/manage
+Disallow: /resources/*/edit
+Disallow: /upload
+
+# Sitemap location
+Sitemap: https://ascol.vercel.app/sitemap.xml

@@ -4,7 +4,7 @@
   top: 16px;
   width: min(100% - 2rem, 1200px);
   margin: 0 auto;
-  padding: 18px 36px;
+  padding: var(--nav-pad-y) 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -62,8 +62,8 @@ body[data-theme="dark"] .navbar {
 }
 
 .brand-badge-img {
-  width: 45px;
-  height: 45px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
   filter: none;
 }

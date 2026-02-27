@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import { NoticeModelPagination, NoticesResponsePagination } from '../models/noticesPagination';
 import { NoticesService } from '../services/api/notices';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
@@ -30,10 +31,13 @@ Math: any;
   constructor(
     private noticesService: NoticesPaginationService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private meta: Meta
   ) {}
 
   async ngOnInit() {
+    this.meta.updateTag({ name: 'description', content: 'Latest official notices and announcements for BIT students at Amrit Science Campus (ASCOL), TU Nepal. Stay updated with exam schedules, admission info and more.' });
+    this.meta.updateTag({ property: 'og:description', content: 'Latest official notices for BIT students at ASCOL, TU Nepal.' });
     await this.loadNotices();
   }
 

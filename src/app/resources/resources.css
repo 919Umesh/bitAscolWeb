@@ -10,7 +10,6 @@
 }
 
 .resources-container {
-  margin-top: var(--nav-clear);
   padding: clamp(var(--space-6), 3vw, var(--space-8));
   background: transparent;
   color: var(--text-primary);
