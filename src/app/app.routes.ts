@@ -9,6 +9,7 @@ import { authGuard } from './guards/auth-guard';
 import { Upload } from './upload/upload'; // your standalone Upload component
 import { Login } from './login/login';
 import { ResourcesManageComponent } from './resources-manage/resources-manage'; // <-- IMPORTANT
+import { AiChat } from './ai-chat/ai-chat';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,11 @@ export const routes: Routes = [
     path: 'details',
     component: Details,
     title: 'Course Details – BIT ASCOL | BIT Nepal Eligibility & Structure'
+  },
+  {
+    path: 'ai-chat',
+    component: AiChat,
+    title: 'AI Assistant – BIT ASCOL | Ask Anything'
   },
   {
     path: 'login',

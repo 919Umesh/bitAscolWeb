@@ -27,6 +27,7 @@
     <li><a routerLink="/resources" routerLinkActive="active">Resources</a></li>
     <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
     <li><a routerLink="/details" routerLinkActive="active">Details</a></li>
+    <li><a routerLink="/ai-chat" routerLinkActive="active">AI Chat</a></li>
 
     <li *ngIf="auth.isLoggedIn()">
       <a routerLink="/resources/new" class="pill">Upload</a>
@@ -90,6 +91,7 @@
   <li><a routerLink="/resources" (click)="closeMenu()"><span class="material-symbols-rounded nav-i">menu_book</span>Resources</a></li>
   <li><a routerLink="/gallery" (click)="closeMenu()"><span class="material-symbols-rounded nav-i">photo_library</span>Gallery</a></li>
   <li><a routerLink="/details" (click)="closeMenu()"><span class="material-symbols-rounded nav-i">info</span>Details</a></li>
+  <li><a routerLink="/ai-chat" (click)="closeMenu()"><span class="material-symbols-rounded nav-i">smart_toy</span>AI Chat</a></li>
 
   <li *ngIf="auth.isLoggedIn()">
     <a routerLink="/resources/new" (click)="closeMenu()">Upload</a>
