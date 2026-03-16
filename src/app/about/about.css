@@ -1,0 +1,105 @@
+.about-page {
+  padding: 36px 20px;
+  color: var(--text-primary);
+}
+
+.about-col {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.about-card {
+  background: var(--bg-white);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 22px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.06);
+}
+
+.about-avatar {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto 14px auto;
+  border: 3px solid rgba(0,0,0,0.04);
+}
+
+.about-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 6px 0;
+}
+
+.about-title {
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.about-location {
+  color: var(--text-light);
+  margin: 0 0 14px;
+}
+
+.about-bio {
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-size: 0.96rem;
+  margin-bottom: 14px;
+}
+
+.about-meta {
+  margin-top: 8px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  align-items:center;
+}
+
+.about-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.about-link {
+  color: var(--primary-color);
+  text-decoration:none;
+  font-weight:500;
+}
+
+.about-social { display:flex; gap:12px; margin-top:8px; }
+
+.about-section { padding-top: 6px; }
+.about-section h2 {
+  margin-top: 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.about-section ul { padding-left: 1.1rem; margin: 6px 0 14px; }
+.about-section li { margin-bottom: 8px; line-height: 1.6; }
+
+.about-section p { margin: 0 0 12px; line-height: 1.6; }
+
+/* smaller, cleaner link appearance for project tags */
+.about-section a { color: var(--primary-color); text-decoration: underline; }
+
+@media (max-width: 780px) {
+  .about-col { grid-template-columns: 1fr; gap: 16px; }
+  .about-card { text-align: center; }
+  .about-avatar { margin-bottom: 12px; }
+  .about-meta { align-items: center; }
+}
+

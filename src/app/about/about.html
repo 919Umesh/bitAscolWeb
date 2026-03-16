@@ -1,0 +1,38 @@
+<section class="about-page">
+  <div class="about-col">
+    <aside class="about-card">
+      <img class="about-avatar" src="{{profileImage}}" alt="Profile image of {{name}}" />
+      <h1 class="about-name">{{name}}</h1>
+      <p class="about-title">{{title}}</p>
+      <p class="about-location">Studying: {{program}} — {{expectedGraduation}}</p>
+      <p class="about-bio">{{devIntro}}</p>
+
+      <div class="about-meta">
+        <a class="about-btn" href="{{contact.resume}}" target="_blank" rel="noopener">Download Resume</a>
+        <div class="about-social">
+          <a class="about-link" href="mailto:{{contact.email}}">{{contact.email}}</a>
+          <a class="about-link" href="{{contact.github}}" target="_blank" rel="noopener">GitHub</a>
+          <a class="about-link" href="{{contact.twitter}}" target="_blank" rel="noopener">X</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="about-section">
+      <h2>About this site</h2>
+      <p>{{sitePurpose}}</p>
+
+      <h2>Why I built it</h2>
+      <p>{{whyBuild}}</p>
+
+      <h2>What you can do here</h2>
+      <ul>
+        <li *ngFor="let f of features">{{f}}</li>
+      </ul>
+
+      <h2>How to reach me</h2>
+      <p>For suggestions or bugs, please reach out via <a href="mailto:{{contact.email}}">email</a> or open an issue on <a href="{{contact.github}}" target="_blank" rel="noopener">GitHub</a>. I'm happy to collaborate with classmates.</p>
+
+      <p style="margin-top:18px; font-style:italic; color:var(--text-secondary);">Made with curiosity and coffee — my goal is to make student life just a little easier.</p>
+    </main>
+  </div>
+</section>
