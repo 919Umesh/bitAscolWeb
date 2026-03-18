@@ -1,20 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ═══════════════════════════════════════════════════════════
+   app.css — Root Component Styles
+   ═══════════════════════════════════════════════════════════ */
 
-body {
-  font-family: 'Arial', sans-serif;
-  line-height: 1.6;
-}
-
-
-
-
-/* app.css */
+/* ── Main Content Area ── */
 .main-content {
-  padding-top: var(--nav-clear); /* computes exact navbar clearance */
+  padding-top: var(--nav-clear);
   min-height: calc(100vh - 120px);
 }
-

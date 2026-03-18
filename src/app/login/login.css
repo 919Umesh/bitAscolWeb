@@ -1,19 +1,24 @@
+/* ═══════════════════════════════════════════════════════════
+   Login Page
+   ═══════════════════════════════════════════════════════════ */
+
 .login-container {
-  max-width: 450px;
+  max-width: 420px;
   margin: clamp(2rem, 6vw, 4rem) auto;
   padding: var(--space-8);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   background: var(--bg-white);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Soft, modern shadow */
-  border: 1px solid #edf2f7;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-default);
   text-align: center;
 }
 
 h2 {
   color: var(--text-primary);
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   font-weight: 700;
   margin-bottom: var(--space-2);
+  letter-spacing: -0.02em;
 }
 
 p.subtitle {
@@ -42,15 +47,22 @@ input {
   padding: var(--space-3) var(--space-4);
   font-size: var(--text-base);
   font-family: var(--font-family);
-  border: 1.5px solid #e2e8f0;
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
-  transition: all 0.2s ease;
+  background: var(--bg-white);
+  color: var(--text-primary);
+  transition: border-color var(--duration-fast) ease,
+              box-shadow var(--duration-fast) ease;
   outline: none;
 }
 
 input:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.10);
+}
+
+input::placeholder {
+  color: var(--text-tertiary);
 }
 
 button {
@@ -63,8 +75,10 @@ button {
   border-radius: var(--radius-md);
   font-size: var(--text-base);
   font-weight: 600;
+  font-family: var(--font-family);
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
+  transition: background-color var(--duration-fast) ease,
+              transform var(--duration-fast) ease;
 }
 
 button:hover:not(:disabled) {
@@ -76,15 +90,16 @@ button:active:not(:disabled) {
 }
 
 button:disabled {
-  background-color: var(--text-light);
+  background-color: var(--text-tertiary);
   cursor: not-allowed;
 }
 
 .error {
   margin-top: var(--space-4);
-  color: #e53e3e;
+  color: #dc2626;
   font-size: var(--text-sm);
-  background: #fff5f5;
-  padding: var(--space-2);
+  background: rgba(239, 68, 68, 0.06);
+  padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
+  border: 1px solid rgba(239, 68, 68, 0.12);
 }

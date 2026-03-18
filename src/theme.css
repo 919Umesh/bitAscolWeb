@@ -1,44 +1,85 @@
 
-/* theme.css */
-:root[data-theme="dark"] .home-container { background: var(--bg-dark); color: #e5e7eb; }
-:root[data-theme="dark"] .hero-badge { background: rgba(99, 102, 241, .18); color: #c7d2fe; }
-:root[data-theme="dark"] .btn-secondary { background: #0f131a; color: #e2e8f0; border-color: rgba(255,255,255,.12); }
-:root[data-theme="dark"] .visual-status { background: #141821; border-color: rgba(255,255,255,.12); }
-:root[data-theme="dark"] .avatar { border-color: #0b0f18; }
+/* ═══════════════════════════════════════════════════════════
+   theme.css — Dark Mode Overrides for Shared / Global Classes
+   ═══════════════════════════════════════════════════════════ */
 
-@media (prefers-color-scheme: dark) {
-  :root[data-theme="system"] .home-container { background: var(--bg-dark); color: #e5e7eb; }
-  :root[data-theme="system"] .hero-badge { background: rgba(99, 102, 241, .18); color: #c7d2fe; }
-  :root[data-theme="system"] .btn-secondary { background: #0f131a; color: #e2e8f0; border-color: rgba(255,255,255,.12); }
-  :root[data-theme="system"] .visual-status { background: #141821; border-color: rgba(255,255,255,.12); }
-  :root[data-theme="system"] .avatar { border-color: #0b0f18; }
+/* ── Home Container ── */
+:root[data-theme="dark"] .home-container {
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .hero-badge {
+  background: rgba(108, 99, 255, 0.14);
+  color: #B8B0FF;
+}
+:root[data-theme="dark"] .btn-secondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+:root[data-theme="dark"] .visual-status {
+  background: var(--bg-elevated);
+  border-color: var(--border-default);
+}
+:root[data-theme="dark"] .avatar {
+  border-color: var(--bg-body);
 }
 
+/* ── Section Headers (Notices, etc.) ── */
+:root[data-theme="dark"] .section-header h2 {
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .notice-card {
+  background: var(--bg-white);
+  border-color: var(--border-default);
+}
+:root[data-theme="dark"] .notice-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.15);
+}
+:root[data-theme="dark"] .notice-title {
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .notice-date {
+  color: var(--text-secondary);
+}
 
-
-
-
-
-/* Light theme glass rim — slightly stronger so it reads on bright bg */
+/* ── Glass Navbar ── */
 .glass-nav {
-  background: transparent;                  /* keep transparent to avoid seam */
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-
-  /* Stronger rim: was 0.20; 0.28 looks better but still subtle */
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.20);
 }
 
-/* Dark/system rim — keep subtle but visible */
 :root[data-theme="dark"] .glass-nav {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-@media (prefers-color-scheme: dark) {
-  :root[data-theme="system"] .glass-nav {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-  }
+  background: rgba(15, 15, 15, 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* ── View More Button ── */
+:root[data-theme="dark"] .view-more-btn {
+  border-color: var(--primary-color);
+  color: var(--primary-light);
+}
+:root[data-theme="dark"] .view-more-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
 
+/* ── Hero Title ── */
+:root[data-theme="dark"] .hero-title {
+  color: var(--text-primary);
+}
+:root[data-theme="dark"] .hero-subtitle {
+  color: var(--text-secondary);
+}
+
+/* ── Status Elements ── */
+:root[data-theme="dark"] .status-muted {
+  color: var(--text-secondary);
+}
+:root[data-theme="dark"] .status-strong {
+  color: var(--text-primary);
+}

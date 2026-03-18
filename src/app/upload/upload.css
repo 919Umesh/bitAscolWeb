@@ -1,5 +1,7 @@
+/* ═══════════════════════════════════════════════════════════
+   Upload Page
+   ═══════════════════════════════════════════════════════════ */
 
-/* Page wrapper */
 .upload-page {
   max-width: 980px;
   margin: clamp(1.5rem, 4vw, 2.5rem) auto;
@@ -8,44 +10,51 @@
   color: var(--text-primary);
 }
 
-/* Header */
+/* ── Header ── */
 .page-header {
   margin-bottom: var(--space-6);
 }
+
 .title {
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.02em;
 }
+
 .subtitle {
   margin-top: var(--space-2);
   color: var(--text-secondary);
   font-size: var(--text-sm);
+  line-height: 1.5;
 }
 
-/* Card */
+/* ── Card ── */
 .card {
   background: var(--bg-white);
-  border: 1px solid #e9edf3;
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   margin-bottom: var(--space-8);
-  box-shadow: 0 6px 16px rgba(26, 32, 44, 0.04);
+  box-shadow: var(--shadow-xs);
 }
+
 .card-title {
   font-size: var(--text-xl);
   font-weight: 600;
   margin-bottom: var(--space-4);
+  color: var(--text-primary);
 }
+
 .card-body {
   margin-top: var(--space-2);
 }
 
-/* Field Group */
+/* ── Field Group ── */
 .field-group {
   margin-bottom: var(--space-4);
 }
+
 .label {
   display: block;
   font-size: var(--text-sm);
@@ -54,25 +63,29 @@
   margin-bottom: var(--space-2);
 }
 
-/* Inputs */
+/* ── Inputs ── */
 .input,
 .select,
 .textarea,
 .input-file {
   width: 100%;
   padding: var(--space-3) var(--space-4);
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
   background: var(--bg-white);
   color: var(--text-primary);
   font-size: var(--text-base);
+  font-family: var(--font-family);
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color var(--duration-fast) ease,
+              box-shadow var(--duration-fast) ease;
 }
+
 .textarea {
   min-height: 120px;
   resize: vertical;
 }
+
 .input-file {
   padding: var(--space-2) var(--space-3);
 }
@@ -82,10 +95,15 @@
 .textarea:focus,
 .input-file:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.10);
 }
 
-/* Actions */
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* ── Actions ── */
 .actions {
   margin-top: var(--space-4);
   display: flex;
@@ -93,7 +111,7 @@
   align-items: center;
 }
 
-/* Buttons */
+/* ── Buttons ── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -104,70 +122,84 @@
   padding: var(--space-3) var(--space-4);
   font-weight: 600;
   font-size: var(--text-sm);
+  font-family: var(--font-family);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color var(--duration-fast) ease,
+              border-color var(--duration-fast) ease;
 }
+
 .btn-primary {
   background: var(--primary-color);
   color: #fff;
   border-color: var(--primary-color);
 }
+
 .btn-primary:hover {
   background: var(--primary-dark);
   border-color: var(--primary-dark);
 }
+
 .btn-primary:disabled {
-  background: var(--primary-light);
-  border-color: var(--primary-light);
+  background: var(--text-tertiary);
+  border-color: var(--text-tertiary);
   cursor: not-allowed;
-  opacity: 0.85;
+  opacity: 0.7;
 }
+
 .btn-ghost {
   background: transparent;
   color: var(--primary-color);
-  border-color: rgba(108, 99, 255, 0.3);
-}
-.btn-ghost:hover {
-  background: rgba(108, 99, 255, 0.08);
+  border-color: var(--border-default);
 }
 
-/* Row with action button */
+.btn-ghost:hover {
+  background: rgba(108, 99, 255, 0.04);
+  border-color: var(--border-accent);
+}
+
+/* ── Row with action ── */
 .row-with-action {
   display: flex;
   gap: var(--space-3);
   align-items: center;
 }
+
 .row-with-action .select {
   flex: 1;
 }
 
-/* Inline card (embedded forms) */
+/* ── Inline card ── */
 .inline-card {
   margin-top: var(--space-4);
   padding: var(--space-4);
-  border: 1px dashed #cbd5e0;
+  border: 1px dashed var(--border-default);
   border-radius: var(--radius-md);
   background: var(--bg-gray);
 }
+
 .inline-title {
   font-size: var(--text-base);
   font-weight: 600;
   margin-bottom: var(--space-3);
+  color: var(--text-primary);
 }
+
 .inline-body {
   margin-top: var(--space-2);
 }
 
-/* Grid layouts */
+/* ── Grid layouts ── */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
 }
+
 .grid.two {
   grid-template-columns: 1fr;
   gap: var(--space-4);
 }
+
 @media (min-width: 720px) {
   .grid.two {
     grid-template-columns: 1fr 1fr;
@@ -177,33 +209,30 @@
   }
 }
 
-/* Current file (edit mode) */
+/* ── Current file ── */
 .current-file {
   margin-top: var(--space-2);
   font-size: var(--text-sm);
   color: var(--text-secondary);
 }
+
 .current-file a {
   color: var(--primary-color);
   text-decoration: none;
 }
+
 .current-file a:hover {
   text-decoration: underline;
 }
 
-/* Errors */
+/* ── Errors ── */
 .error {
-  color: #e53e3e;
+  color: #dc2626;
   font-size: var(--text-xs);
   margin-top: var(--space-1);
 }
 
-/* Headings inside the main card */
+/* ── Headings inside main card ── */
 .card h2 {
   margin-bottom: var(--space-4);
 }
-
-/* Small utility spacing if needed */
-.mt-2 { margin-top: var(--space-2); }
-.mt-4 { margin-top: var(--space-4); }
-.mt-6 { margin-top: var(--space-6); }
